@@ -11,12 +11,6 @@ $price_max = $_GET['price_max'];
 $search = $_GET['search'];
 
 
-
-
-
-
-
-
 ?>
 
 <!DOCTYPE html>

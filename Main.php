@@ -1,5 +1,15 @@
 <?php
 include "database.php";
+
+$sql1 = "SELECT c_name FROM category";
+$stmt = $dbh->prepare($sql1);
+$stmt->execute();
+$categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$sql2 = "SELECT v_name FROM vendors";
+$stmt = $dbh->prepare($sql2);
+$stmt->execute();
+$vendorss = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="uk-UA">
@@ -27,22 +37,23 @@ include "database.php";
       <p class="task"> Товари в інтернет-магазині: </p>
       <form action="result.php" method="GET">
         <div class="search">
-          <p > Категорія: </p>
-          <select name="category" >
-            <option value="Videocard">Videocard</option>
-            <option value="CPU">CPU</option>
-            <option value="Display">Display</option>
-            <option value="Memory">Memory</option>
+          <p > Категорія: </p>  
+          <select name="category">
+            <?php foreach ($categories as $category): ?>
+                <option value="<?= htmlspecialchars($category['c_name']) ?>">
+                    <?= htmlspecialchars($category['c_name']) ?>
+                </option>
+            <?php endforeach; ?>
           </select>
         </div>
         <div class="search">
           <p > Виробник: </p>
-          <select name="vendors" >
-            <option value="LG">LG</option>
-            <option value="ASUS">ASUS</option>
-            <option value="Samsung">Samsung</option>
-            <option value="Intel">Intel</option>
-            <option value="AMD">AMD</option>
+          <select name="vendors">
+            <?php foreach ($vendorss as $vendors): ?>
+                <option value="<?= htmlspecialchars($vendors['v_name']) ?>">
+                    <?= htmlspecialchars($vendors['v_name']) ?>
+                </option>
+            <?php endforeach; ?>
           </select>
         </div>
         <div class="search">
